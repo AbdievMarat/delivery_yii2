@@ -45,8 +45,13 @@ return [
             'errorAction' => 'site/error',
         ],
         'urlManager' => [
+            'class' => 'codemix\localeurls\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'languages' => [
+                'ru' => 'ru-RU',
+                'en' => 'en-US'
+            ],
             'rules' => [
             ],
         ],
@@ -55,7 +60,7 @@ return [
                 '*' => [
                     'class' => 'yii\i18n\DbMessageSource',
                     'db' => 'db',
-                    'sourceLanguage' => 'ru-RU', // Developer language
+                    'sourceLanguage' => 'ru-RU',
                     'sourceMessageTable' => '{{%language_source}}',
                     'messageTable' => '{{%language_translate}}',
                     'cachingDuration' => 86400,
