@@ -17,7 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <h1><?= Yii::$app->formatter->asDate('2022-04-22', 'long') ?></h1>
     <p>
         <?= Html::a(Yii::t('sourse', 'Create Sourse'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>

@@ -60,11 +60,10 @@ return [
                 '*' => [
                     'class' => 'yii\i18n\DbMessageSource',
                     'db' => 'db',
-                    'sourceLanguage' => 'ru-RU',
                     'sourceMessageTable' => '{{%language_source}}',
                     'messageTable' => '{{%language_translate}}',
                     'cachingDuration' => 86400,
-                    'enableCaching' => true,
+                    'enableCaching' => false,//во время разработки false, в бою true
                 ],
             ],
         ],
