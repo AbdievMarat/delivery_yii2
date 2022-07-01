@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'availability')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList(\backend\models\Sourse::getStatuses()) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('sourse', 'Save'), ['class' => 'btn btn-success']) ?>

@@ -17,7 +17,7 @@ class SourseSearch extends Sourse
     public function rules()
     {
         return [
-            [['id', 'availability'], 'integer'],
+            [['id', 'status'], 'integer'],
             [['name'], 'safe'],
         ];
     }
@@ -59,7 +59,7 @@ class SourseSearch extends Sourse
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'availability' => $this->availability,
+            'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

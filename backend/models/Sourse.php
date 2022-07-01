@@ -9,10 +9,12 @@ use Yii;
  *
  * @property int $id
  * @property string $name Name
- * @property int|null $availability Availability
+ * @property int|null $status Status
  */
 class Sourse extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_DELETED = 2;
     /**
      * {@inheritdoc}
      */
@@ -28,7 +30,7 @@ class Sourse extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['availability'], 'integer'],
+            [['status'], 'integer'],
             [['name'], 'string', 'max' => 255],
         ];
     }
@@ -41,7 +43,18 @@ class Sourse extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('sourse', 'ID'),
             'name' => Yii::t('sourse', 'Name'),
-            'availability' => Yii::t('sourse', 'Availability'),
+            'status' => Yii::t('sourse', 'Status'),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function getStatuses()
+    {
+        return [
+            self::STATUS_ACTIVE => Yii::t('sourse', 'Active'),
+            self::STATUS_DELETED => Yii::t('sourse', 'Deleted'),
         ];
     }
 }

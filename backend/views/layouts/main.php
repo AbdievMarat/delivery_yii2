@@ -44,10 +44,15 @@ AppAsset::register($this);
     ]);
 
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => Yii::t('settings', 'Settings'),
+        ['label' => Yii::t('header', 'Home'), 'url' => ['/site/index']],
+        ['label' => Yii::t('header', 'Settings'),
             'items' => [
-                ['label' => Yii::t('settings', 'Translate Manager'), 'url' => ['/translatemanager']],
+                ['label' => Yii::t('header', 'Translate Manager'), 'url' => ['/translatemanager']],
+            ],
+        ],
+        ['label' => Yii::t('header', 'Directory'),
+            'items' => [
+                ['label' => Yii::t('sourse', 'Sourses'), 'url' => ['/sourse/index']],
             ],
         ],
     ];

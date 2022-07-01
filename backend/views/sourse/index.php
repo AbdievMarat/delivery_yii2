@@ -6,6 +6,7 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use backend\models\Sourse;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\SourseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -32,7 +33,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
-            'availability',
+            [
+                'attribute' => 'status',
+                'format' => 'html',
+                'value' => function ($model) {
+                    if (isset($model->getStatuses()[$model->status])) {
+                        return $model->getStatuses()[$model->status];
+                    } else {
+                        return Yii::t('backend', 'Undefined');
+                    }
+                },
+                'filter' => \backend\models\Sourse::getStatuses(),
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Sourse $model, $key, $index, $column) {
