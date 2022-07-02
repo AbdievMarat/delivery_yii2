@@ -15,7 +15,7 @@ class m220630_113242_create_sourses_table extends Migration
         $this->createTable('{{%sourses}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string(255)->notNull()->comment('Name'),
-            'status' => $this->tinyInteger()->defaultValue(1)->comment('Status'),
+            'status' => $this->tinyInteger()->notNull()->defaultValue(1)->comment('Status'),
         ]);
     }
 

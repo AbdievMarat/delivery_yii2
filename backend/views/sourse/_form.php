@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'status')->dropDownList(\backend\models\Sourse::getStatuses()) ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('sourse', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-group-justified btn-success' : 'btn btn-group-justified btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

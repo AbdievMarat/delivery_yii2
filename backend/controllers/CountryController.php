@@ -2,16 +2,16 @@
 
 namespace backend\controllers;
 
-use backend\models\Sourse;
-use backend\models\SourseSearch;
+use backend\models\Country;
+use backend\models\CountrySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * SourseController implements the CRUD actions for Sourse model.
+ * CountryController implements the CRUD actions for Country model.
  */
-class SourseController extends Controller
+class CountryController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class SourseController extends Controller
     }
 
     /**
-     * Lists all Sourse models.
+     * Lists all Country models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new SourseSearch();
+        $searchModel = new CountrySearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,8 +48,8 @@ class SourseController extends Controller
     }
 
     /**
-     * Displays a single Sourse model.
-     * @param int $id Код
+     * Displays a single Country model.
+     * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -61,13 +61,13 @@ class SourseController extends Controller
     }
 
     /**
-     * Creates a new Sourse model.
+     * Creates a new Country model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Sourse();
+        $model = new Country();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,9 +83,9 @@ class SourseController extends Controller
     }
 
     /**
-     * Updates an existing Sourse model.
+     * Updates an existing Country model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id Код
+     * @param int $id ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -103,9 +103,9 @@ class SourseController extends Controller
     }
 
     /**
-     * Deletes an existing Sourse model.
+     * Deletes an existing Country model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id Код
+     * @param int $id ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -117,15 +117,15 @@ class SourseController extends Controller
     }
 
     /**
-     * Finds the Sourse model based on its primary key value.
+     * Finds the Country model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id Код
-     * @return Sourse the loaded model
+     * @param int $id ID
+     * @return Country the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Sourse::findOne(['id' => $id])) !== null) {
+        if (($model = Country::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

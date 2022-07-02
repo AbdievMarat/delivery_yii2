@@ -53,6 +53,7 @@ AppAsset::register($this);
         ['label' => Yii::t('header', 'Directory'),
             'items' => [
                 ['label' => Yii::t('sourse', 'Sourses'), 'url' => ['/sourse/index']],
+                ['label' => Yii::t('country', 'Countries'), 'url' => ['/country/index']],
             ],
         ],
     ];
