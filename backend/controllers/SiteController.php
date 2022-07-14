@@ -101,4 +101,17 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
+    public function actionCreateAdmin()
+    {
+        $user = new \common\models\User();
+        $user->username = 'admin';
+        $user->email = 'admin@kulikov.com';
+        $user->status = 10;
+        $user->setPassword('ma123');
+        $user->generateAuthKey();
+        $user->generateEmailVerificationToken();
+        $user->save();
+
+        return 'ok';
+    }
 }
