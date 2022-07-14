@@ -44,3 +44,8 @@ phpunit.phar
 /backend/web/index.php
 /backend/web/index-test.php
 /backend/web/robots.txt
+
+#ignore conf nginx
+/docker/nginx/conf.d/delivery.kulikov.com.conf
+/docker/nginx/conf.d/dev-delivery.kulikov.com.conf
+
