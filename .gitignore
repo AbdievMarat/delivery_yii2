@@ -46,7 +46,5 @@ phpunit.phar
 /backend/web/robots.txt
 
 #ignore conf nginx
-/docker/nginx/conf.d/default.conf
-/docker/nginx/conf.d/delivery.kulikov.com.conf
-/docker/nginx/conf.d/dev-delivery.kulikov.com.conf
+/docker/nginx/conf.d
 
