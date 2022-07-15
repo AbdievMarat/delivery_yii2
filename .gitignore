@@ -46,5 +46,5 @@ phpunit.phar
 /backend/web/robots.txt
 
 #ignore conf nginx
-/docker/nginx/conf.d
+/docker/nginx
 
