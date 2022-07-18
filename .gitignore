@@ -45,6 +45,5 @@ phpunit.phar
 /backend/web/index-test.php
 /backend/web/robots.txt
 
-#ignore conf nginx
+#ignore docker nginx
 /docker/nginx
-
