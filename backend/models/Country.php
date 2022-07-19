@@ -17,6 +17,7 @@ use Yii;
  * @property string|null $latitude Latitude
  * @property string|null $longitude Longitude
  * @property int $status Status
+ * @property string|null $address Address
  */
 class Country extends \yii\db\ActiveRecord
 {
@@ -37,10 +38,11 @@ class Country extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name', 'address', 'latitude', 'longitude'], 'required'],
             [['status'], 'integer'],
             [['name', 'name_currency', 'name_organization', 'contact_phone', 'token_yandex', 'token_mobile_backend'], 'string', 'max' => 255],
             [['latitude', 'longitude'], 'string', 'max' => 100],
+            [['address'], 'string', 'max' => 500],
         ];
     }
 
@@ -60,6 +62,7 @@ class Country extends \yii\db\ActiveRecord
             'latitude' => Yii::t('country', 'Latitude'),
             'longitude' => Yii::t('country', 'Longitude'),
             'status' => Yii::t('country', 'Status'),
+            'address' => Yii::t('country', 'Address'),
         ];
     }
 

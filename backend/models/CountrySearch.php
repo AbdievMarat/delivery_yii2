@@ -18,7 +18,7 @@ class CountrySearch extends Country
     {
         return [
             [['id', 'status'], 'integer'],
-            [['name', 'name_currency', 'name_organization', 'contact_phone', 'token_yandex', 'token_mobile_backend', 'latitude', 'longitude'], 'safe'],
+            [['name', 'name_currency', 'name_organization', 'contact_phone', 'token_yandex', 'token_mobile_backend', 'latitude', 'longitude', 'address'], 'safe'],
         ];
     }
 
@@ -69,7 +69,8 @@ class CountrySearch extends Country
             ->andFilterWhere(['like', 'token_yandex', $this->token_yandex])
             ->andFilterWhere(['like', 'token_mobile_backend', $this->token_mobile_backend])
             ->andFilterWhere(['like', 'latitude', $this->latitude])
-            ->andFilterWhere(['like', 'longitude', $this->longitude]);
+            ->andFilterWhere(['like', 'longitude', $this->longitude])
+            ->andFilterWhere(['like', 'address', $this->address]);
 
         return $dataProvider;
     }
