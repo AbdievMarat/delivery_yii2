@@ -5,7 +5,7 @@ namespace backend\models;
 use Yii;
 
 /**
- * This is the model class for table "{{%counties}}".
+ * This is the model class for table "{{%countries}}".
  *
  * @property int $id
  * @property string $name Name
@@ -29,7 +29,7 @@ class Country extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%counties}}';
+        return '{{%countries}}';
     }
 
     /**
