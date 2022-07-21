@@ -96,64 +96,70 @@
             setTimeout(function () {
                 var request = $('#<?= $formIdAddress ?>').val();
 
-                ymaps.geocode(request).then(function (res) {
-                    var obj = res.geoObjects.get(0),
-                        error, hint;
-                    if (obj) {
-                        switch (obj.properties.get('metaDataProperty.GeocoderMetaData.precision')) {
-                            case 'exact':
-                                break;
-                            case 'number':
-                            case 'near':
-                            case 'range':
-                                error = 'Неточный адрес, требуется уточнение';
-                                hint = 'Уточните номер дома';
-                                break;
-                            case 'street':
-                                error = 'Неполный адрес, требуется уточнение';
-                                hint = 'Уточните номер дома';
-                                break;
-                            case 'other':
-                            default:
-                                error = 'Неточный адрес, требуется уточнение';
-                                hint = 'Уточните адрес';
+                if(request == ''){
+                    $('#<?= $formIdLatitude ?>').val('');
+                    $('#<?= $formIdLonitude ?>').val('');
+                }
+                else{
+                    ymaps.geocode(request).then(function (res) {
+                        var obj = res.geoObjects.get(0),
+                            error, hint;
+                        if (obj) {
+                            switch (obj.properties.get('metaDataProperty.GeocoderMetaData.precision')) {
+                                case 'exact':
+                                    break;
+                                case 'number':
+                                case 'near':
+                                case 'range':
+                                    error = 'Неточный адрес, требуется уточнение';
+                                    hint = 'Уточните номер дома';
+                                    break;
+                                case 'street':
+                                    error = 'Неполный адрес, требуется уточнение';
+                                    hint = 'Уточните номер дома';
+                                    break;
+                                case 'other':
+                                default:
+                                    error = 'Неточный адрес, требуется уточнение';
+                                    hint = 'Уточните адрес';
+                            }
+                        } else {
+                            error = 'Адрес не найден';
+                            hint = 'Уточните адрес';
                         }
-                    } else {
-                        error = 'Адрес не найден';
-                        hint = 'Уточните адрес';
-                    }
 
-                    // Если геокодер возвращает пустой массив или неточный результат, то показываем ошибку.
-                    if (error) {
-                        showError(error, hint);
+                        // Если геокодер возвращает пустой массив или неточный результат, то показываем ошибку.
+                        if (error) {
+                            showError(error, hint);
 
-                        $('#<?= $formIdLatitude ?>').val('');
-                        $('#<?= $formIdLonitude ?>').val('');
-                    } else {
-                        if (myPlacemark) {
-                            myPlacemark.geometry.setCoordinates(obj.geometry.getCoordinates());
+                            $('#<?= $formIdLatitude ?>').val('');
+                            $('#<?= $formIdLonitude ?>').val('');
+                        } else {
+                            if (myPlacemark) {
+                                myPlacemark.geometry.setCoordinates(obj.geometry.getCoordinates());
+                            }
+                            // Если нет – создаем.
+                            else {
+                                myPlacemark = new ymaps.Placemark(obj.geometry.getCoordinates(), {
+                                        balloonContent: 'Фактические координаты',
+                                    },
+                                    {
+                                        preset: 'islands#bluePersonIcon',
+                                    });
+                            }
+                            myMap.setCenter(obj.geometry.getCoordinates(), <?= $zoom ?>);
+                            myMap.geoObjects.add(myPlacemark);
+
+                            $('#notice').css('display', 'none');
+                            $('#<?= $formIdAddress ?>').removeClass('input_error');
+
+                            $('#<?= $formIdLatitude ?>').val(obj.geometry.getCoordinates()[0]);
+                            $('#<?= $formIdLonitude ?>').val(obj.geometry.getCoordinates()[1]);
                         }
-                        // Если нет – создаем.
-                        else {
-                            myPlacemark = new ymaps.Placemark(obj.geometry.getCoordinates(), {
-                                    balloonContent: 'Фактические координаты',
-                                },
-                                {
-                                    preset: 'islands#bluePersonIcon',
-                                });
-                        }
-                        myMap.setCenter(obj.geometry.getCoordinates(), <?= $zoom ?>);
-                        myMap.geoObjects.add(myPlacemark);
-
-                        $('#notice').css('display', 'none');
-                        $('#<?= $formIdAddress ?>').removeClass('input_error');
-
-                        $('#<?= $formIdLatitude ?>').val(obj.geometry.getCoordinates()[0]);
-                        $('#<?= $formIdLonitude ?>').val(obj.geometry.getCoordinates()[1]);
-                    }
-                }, function (e) {
-                    console.log(e);
-                });
+                    }, function (e) {
+                        console.log(e);
+                    });
+                }
             }, 200);
         }
 

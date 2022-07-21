@@ -1,11 +1,11 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap5\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\SourseSearch */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form yii\bootstrap5\ActiveForm */
 ?>
 
 <div class="sourse-search">
@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'status') ?>
 
-    <div class="form-group">
+    <div class="mb-3">
         <?= Html::submitButton(Yii::t('backend', 'Search'), ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton(Yii::t('backend', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
     </div>

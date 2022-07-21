@@ -1,19 +1,19 @@
 <?php
 
 use backend\widgets\YandexMap;
+use wbraganca\dynamicform\DynamicFormWidget;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap5\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Country */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form yii\bootstrap5\ActiveForm */
 ?>
 
 <div class="country-form">
+    <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
     <div class="row">
         <div class="col-md-6">
-            <?php $form = ActiveForm::begin(); ?>
-
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'name_currency')->textInput(['maxlength' => true]) ?>
@@ -27,6 +27,55 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'token_mobile_backend')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'status')->dropDownList(\backend\models\Country::getStatuses()) ?>
+
+            <div class="card mb-3">
+                <div class="card-header"><h4><?= Yii::t('country_yandex_tariffs', 'Tariffs') ?></h4></div>
+                <div class="card-body">
+                    <?php DynamicFormWidget::begin([
+                        'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
+                        'widgetBody' => '.container-items', // required: css class selector
+                        'widgetItem' => '.item', // required: css class
+                        'limit' => 3, // the maximum times, an element can be cloned (default 999)
+                        'min' => 1, // 0 or 1 (default 1)
+                        'insertButton' => '.add-item', // css class
+                        'deleteButton' => '.remove-item', // css class
+                        'model' => $modelsYandexTariff[0],
+                        'formId' => 'dynamic-form',
+                        'formFields' => [
+                            'name_tariff',
+                        ],
+                    ]);?>
+
+                    <div class="container-items"><!-- widgetContainer -->
+                        <?php foreach ($modelsYandexTariff as $i => $modelYandexTariff): ?>
+                            <div class="item card mb-3"><!-- widgetBody -->
+                                <div class="card-header">
+                                    <h3 class="card-title float-start"><?= Yii::t('country_yandex_tariffs', 'Tariff') ?></h3>
+                                    <div class="float-end">
+                                        <button type="button" class="add-item btn btn-success btn-sm">+</button>
+                                        <button type="button" class="remove-item btn btn-danger btn-sm">-</button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="card-body">
+                                    <?php
+                                    // necessary for update action.
+                                    if (! $modelYandexTariff->isNewRecord) {
+                                        echo Html::activeHiddenInput($modelYandexTariff, "[{$i}]id");
+                                    }
+                                    ?>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <?= $form->field($modelYandexTariff, "[{$i}]name_tariff")->textInput(['maxlength' => true]) ?>
+                                        </div>
+                                    </div><!-- .row -->
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <?php DynamicFormWidget::end(); ?>
+                </div>
+            </div>
         </div>
         <div class="col-md-6">
             <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
@@ -41,8 +90,6 @@ use yii\widgets\ActiveForm;
                     <?= $form->field($model, 'longitude')->textInput(['maxlength' => true,'readonly'=> true]) ?>
                 </div>
             </div>
-
-            <label class="control-label">Map</label>
 
             <?php
                 try {
@@ -76,7 +123,7 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="col-md-12 form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-group-justified btn-success' : 'btn btn-group-justified btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success w-100' : 'btn btn-primary w-100']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

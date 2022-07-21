@@ -76,4 +76,14 @@ class Country extends \yii\db\ActiveRecord
             self::STATUS_INACTIVE => Yii::t('backend', 'Inactive'),
         ];
     }
+
+    /**
+     * Gets query for [[CountryYandexTariff]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getYandexTariffs()
+    {
+        return $this->hasMany(CountryYandexTariff::className(), ['country_id' => 'id']);
+    }
 }
