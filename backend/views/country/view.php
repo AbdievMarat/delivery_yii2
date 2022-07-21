@@ -36,9 +36,29 @@ $this->params['breadcrumbs'][] = $this->title;
             'contact_phone',
             'token_yandex',
             'token_mobile_backend',
+            'address',
             'latitude',
             'longitude',
-            'status',
+            [
+                'attribute' => 'status',
+                'value' => function ($model) {
+                    if (isset($model->getStatuses()[$model->status])) {
+                        return $model->getStatuses()[$model->status];
+                    } else {
+                        return Yii::t('backend', 'Undefined');
+                    }
+                },
+            ],
+            [
+                'attribute' => 'yandexTariffs',
+                'value' => function ($model) {
+                    if ($model->getYandexTariffs() !== null) {
+                        return implode(', ', array_column($model->getYandexTariffs()->select('name_tariff')->asArray()->all(), 'name_tariff'));
+                    } else {
+                        return Yii::t('backend', 'Undefined');
+                    }
+                },
+            ],
         ],
     ]) ?>
 

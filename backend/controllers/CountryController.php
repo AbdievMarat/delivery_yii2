@@ -165,7 +165,7 @@ class CountryController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'modelsYandexTariff' => (empty($modelsYandexTariff)) ? [$model->yandexTariffs] : $modelsYandexTariff
+            'modelsYandexTariff' => (empty($modelsYandexTariff)) ? [new CountryYandexTariff] : $modelsYandexTariff
 
         ]);
     }

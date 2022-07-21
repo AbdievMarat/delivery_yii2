@@ -15,6 +15,10 @@ use Yii;
  */
 class CountryYandexTariff extends \yii\db\ActiveRecord
 {
+    const TARIFF_COURIER = 'courier';
+    const TARIFF_EXPRESS = 'express';
+    const TARIFF_CARGO = 'cargo';
+
     /**
      * {@inheritdoc}
      */
@@ -56,5 +60,17 @@ class CountryYandexTariff extends \yii\db\ActiveRecord
     public function getCountry()
     {
         return $this->hasOne(Country::className(), ['id' => 'country_id']);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getTariffs()
+    {
+        return [
+            self::TARIFF_COURIER => Yii::t('country_yandex_tariffs', 'Courier'),
+            self::TARIFF_EXPRESS => Yii::t('country_yandex_tariffs', 'Express'),
+            self::TARIFF_CARGO => Yii::t('country_yandex_tariffs', 'Cargo'),
+        ];
     }
 }
