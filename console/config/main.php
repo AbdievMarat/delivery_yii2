@@ -16,11 +16,19 @@ return [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'modules' => [
+        'translatemanager' => [
+            'class' => 'lajax\translatemanager\Module',
+            'allowedIPs' => ['*', '::1'],
+            'roles' => ['@'],
+        ],
+    ],
     'controllerMap' => [
         'fixture' => [
             'class' => \yii\console\controllers\FixtureController::class,
             'namespace' => 'common\fixtures',
         ],
+        'translate' => \lajax\translatemanager\commands\TranslatemanagerController::className()
     ],
     'components' => [
         'log' => [
