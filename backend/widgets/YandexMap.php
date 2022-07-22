@@ -29,7 +29,7 @@ class YandexMap extends Widget
      * @var string
      * Input id for longitude
      */
-    public $formIdLonitude = '';
+    public $formIdLongitude = '';
 
     /***
      * @var float
@@ -41,7 +41,7 @@ class YandexMap extends Widget
      * @var float
      * Default longitude
      */
-    public $centerLonitude = 74.59554;
+    public $centerLongitude = 74.59554;
 
     /***
      * @var int
@@ -74,19 +74,19 @@ class YandexMap extends Widget
     }
 
     /**
-     * @return string|void
+     * @return string
      */
     public function run()
     {
         $params = [
             'keyAPI' => Yii::$app->params['yandexMaps']['keyAPI'] ?? $this->keyAPI,
             'centerLatitude' => Yii::$app->params['yandexMaps']['centerLatitude'] ?? $this->centerLatitude,
-            'centerLonitude' => Yii::$app->params['yandexMaps']['centerLonitude'] ?? $this->centerLonitude,
+            'centerLongitude' => Yii::$app->params['yandexMaps']['centerLongitude'] ?? $this->centerLongitude,
             'zoom' => Yii::$app->params['yandexMaps']['zoom'] ?? $this->zoom,
             'lang' => Yii::$app->params['yandexMaps']['lang'] ?? $this->lang,
             'formIdAddress' => $this->formIdAddress,
             'formIdLatitude' => $this->formIdLatitude,
-            'formIdLonitude' => $this->formIdLonitude,
+            'formIdLongitude' => $this->formIdLongitude,
             'placeMark' => $this->placeMark,
         ];
 

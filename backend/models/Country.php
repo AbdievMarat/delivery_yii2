@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%countries}}".
@@ -85,5 +86,16 @@ class Country extends \yii\db\ActiveRecord
     public function getYandexTariffs()
     {
         return $this->hasMany(CountryYandexTariff::className(), ['country_id' => 'id']);
+    }
+
+    /**
+     * list of countries for filters selects
+     *
+     * @return array
+     */
+    public static function getCountriesList()
+    {
+        $list = self::findAll(['status' => self::STATUS_ACTIVE]);
+        return ArrayHelper::map($list, 'id', 'name');
     }
 }

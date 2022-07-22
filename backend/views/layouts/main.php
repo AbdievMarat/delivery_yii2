@@ -54,6 +54,7 @@ AppAsset::register($this);
             'items' => [
                 ['label' => Yii::t('sourse', 'Sourses'), 'url' => ['/sourse/index']],
                 ['label' => Yii::t('country', 'Countries'), 'url' => ['/country/index']],
+                ['label' => Yii::t('shop', 'Shops'), 'url' => ['/shop/index']],
             ],
         ],
     ];

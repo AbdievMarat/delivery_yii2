@@ -1,3 +1,14 @@
+<?php
+/** @var $lang backend\widgets\YandexMap */
+/** @var $keyAPI backend\widgets\YandexMap */
+/** @var $centerLatitude backend\widgets\YandexMap */
+/** @var $centerLongitude backend\widgets\YandexMap */
+/** @var $zoom backend\widgets\YandexMap */
+/** @var $formIdAddress backend\widgets\YandexMap */
+/** @var $formIdLatitude backend\widgets\YandexMap */
+/** @var $formIdLongitude backend\widgets\YandexMap */
+?>
+
 <script src="https://api-maps.yandex.ru/2.1/?lang=<?= $lang ?>&apikey=<?= $keyAPI ?>" type="text/javascript"></script>
 
 <style>
@@ -12,12 +23,12 @@
     }
 </style>
 
-<div id="map" style="width:100%; height:300px"></div>
+<div id="map" class="mb-3" style="width:100%; height:300px"></div>
 
 <script>
     function init() {
         var myMap = new ymaps.Map('map', {
-            center: [<?= $centerLatitude ?>, <?= $centerLonitude ?>],
+            center: [<?= $centerLatitude ?>, <?= $centerLongitude ?>],
             zoom: <?= $zoom ?>
         });
         var myPlacemark;
@@ -81,7 +92,7 @@
 
                 $('#<?= $formIdAddress ?>').val(firstGeoObject.getAddressLine());
                 $('#<?= $formIdLatitude?>').val(coords[0]);
-                $('#<?= $formIdLonitude ?>').val(coords[1]);
+                $('#<?= $formIdLongitude ?>').val(coords[1]);
             });
         }
 
@@ -96,9 +107,9 @@
             setTimeout(function () {
                 var request = $('#<?= $formIdAddress ?>').val();
 
-                if(request == ''){
+                if(request === ''){
                     $('#<?= $formIdLatitude ?>').val('');
-                    $('#<?= $formIdLonitude ?>').val('');
+                    $('#<?= $formIdLongitude ?>').val('');
                 }
                 else{
                     ymaps.geocode(request).then(function (res) {
@@ -133,7 +144,7 @@
                             showError(error, hint);
 
                             $('#<?= $formIdLatitude ?>').val('');
-                            $('#<?= $formIdLonitude ?>').val('');
+                            $('#<?= $formIdLongitude ?>').val('');
                         } else {
                             if (myPlacemark) {
                                 myPlacemark.geometry.setCoordinates(obj.geometry.getCoordinates());
@@ -154,7 +165,7 @@
                             $('#<?= $formIdAddress ?>').removeClass('input_error');
 
                             $('#<?= $formIdLatitude ?>').val(obj.geometry.getCoordinates()[0]);
-                            $('#<?= $formIdLonitude ?>').val(obj.geometry.getCoordinates()[1]);
+                            $('#<?= $formIdLongitude ?>').val(obj.geometry.getCoordinates()[1]);
                         }
                     }, function (e) {
                         console.log(e);

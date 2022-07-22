@@ -1,24 +1,25 @@
 <?php
 
+use backend\models\Country;
+use backend\models\Shop;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use backend\models\Country;
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\CountrySearch */
+/* @var $searchModel backend\models\ShopSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('country', 'Countries');
+$this->title = Yii::t('shop', 'Shops');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="country-index">
+<div class="shop-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('country', 'Create Country'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('shop', 'Create Shop'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -31,17 +32,25 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
+            [
+                'attribute' => 'country_id',
+                'value' => function ($model) {
+                    if (isset($model->country)) {
+                        return $model->country->name;
+                    } else {
+                        return Yii::t('backend', 'Undefined');
+                    }
+                },
+                'filter' => Country::getCountriesList(),
+            ],
             'name',
-            'name_currency',
-            'name_organization',
             'contact_phone',
-            //'token_yandex',
-            //'token_mobile_backend',
+            'address',
             //'latitude',
             //'longitude',
+            'mobile_backend_id',
             [
                 'attribute' => 'status',
-                'format' => 'html',
                 'value' => function ($model) {
                     if (isset($model->getStatuses()[$model->status])) {
                         return $model->getStatuses()[$model->status];
@@ -49,11 +58,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Yii::t('backend', 'Undefined');
                     }
                 },
-                'filter' => Country::getStatuses(),
+                'filter' => Shop::getStatuses(),
             ],
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Country $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Shop $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],
