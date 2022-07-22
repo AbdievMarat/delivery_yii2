@@ -19,7 +19,7 @@ return [
     'modules' => [
         'translatemanager' => [
             'class' => 'lajax\translatemanager\Module',
-            'allowedIPs' => ['*', '::1'],
+            'allowedIPs' => ['*'],
             'roles' => ['@'],
         ],
     ],
@@ -36,6 +36,18 @@ return [
                 [
                     'class' => \yii\log\FileTarget::class,
                     'levels' => ['error', 'warning'],
+                ],
+            ],
+        ],
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\DbMessageSource',
+                    'db' => 'db',
+                    'sourceMessageTable' => '{{%language_source}}',
+                    'messageTable' => '{{%language_translate}}',
+                    'cachingDuration' => 86400,
+                    'enableCaching' => false,//во время разработки false, в бою true
                 ],
             ],
         ],
