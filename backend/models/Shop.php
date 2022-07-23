@@ -54,15 +54,15 @@ class Shop extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('shop', 'ID'),
+            'id' => Yii::t('backend', 'ID'),
             'country_id' => Yii::t('shop', 'Country'),
-            'name' => Yii::t('shop', 'Name'),
+            'name' => Yii::t('backend', 'Name'),
             'contact_phone' => Yii::t('shop', 'Contact phone'),
             'address' => Yii::t('shop', 'Address'),
             'latitude' => Yii::t('shop', 'Latitude'),
             'longitude' => Yii::t('shop', 'Longitude'),
             'mobile_backend_id' => Yii::t('shop', 'Mobile backend id'),
-            'status' => Yii::t('shop', 'Status'),
+            'status' => Yii::t('backend', 'Status'),
         ];
     }
 

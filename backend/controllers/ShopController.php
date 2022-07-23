@@ -130,6 +130,6 @@ class ShopController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('shop', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(Yii::t('backend', 'The requested page does not exist.'));
     }
 }

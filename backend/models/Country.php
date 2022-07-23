@@ -53,8 +53,8 @@ class Country extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('country', 'ID'),
-            'name' => Yii::t('country', 'Name'),
+            'id' => Yii::t('backend', 'ID'),
+            'name' => Yii::t('backend', 'Name'),
             'name_currency' => Yii::t('country', 'Name Currency'),
             'name_organization' => Yii::t('country', 'Name Organization'),
             'contact_phone' => Yii::t('country', 'Contact Phone'),
@@ -62,7 +62,7 @@ class Country extends \yii\db\ActiveRecord
             'token_mobile_backend' => Yii::t('country', 'Token Mobile Backend'),
             'latitude' => Yii::t('country', 'Latitude'),
             'longitude' => Yii::t('country', 'Longitude'),
-            'status' => Yii::t('country', 'Status'),
+            'status' => Yii::t('backend', 'Status'),
             'address' => Yii::t('country', 'Address'),
         ];
     }

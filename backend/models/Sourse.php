@@ -42,9 +42,9 @@ class Sourse extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('sourse', 'ID'),
-            'name' => Yii::t('sourse', 'Name'),
-            'status' => Yii::t('sourse', 'Status'),
+            'id' => Yii::t('backend', 'ID'),
+            'name' => Yii::t('backend', 'Name'),
+            'status' => Yii::t('backend', 'Status'),
         ];
     }
 

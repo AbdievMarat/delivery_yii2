@@ -46,7 +46,7 @@ class CountryYandexTariff extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('country_yandex_tariffs', 'ID'),
+            'id' => Yii::t('backend', 'ID'),
             'country_id' => Yii::t('country_yandex_tariffs', 'Country'),
             'name_tariff' => Yii::t('country_yandex_tariffs', 'Name tariff'),
         ];
