@@ -4,12 +4,11 @@ namespace backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Sourse;
 
 /**
- * SourseSearch represents the model behind the search form of `backend\models\Sourse`.
+ * SourceSearch represents the model behind the search form of `backend\models\Source`.
  */
-class SourseSearch extends Sourse
+class SourceSearch extends Source
 {
     /**
      * {@inheritdoc}
@@ -40,7 +39,7 @@ class SourseSearch extends Sourse
      */
     public function search($params)
     {
-        $query = Sourse::find();
+        $query = Source::find();
 
         // add conditions that should always apply here
 

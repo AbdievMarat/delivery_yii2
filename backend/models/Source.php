@@ -5,13 +5,13 @@ namespace backend\models;
 use Yii;
 
 /**
- * This is the model class for table "{{%sourses}}".
+ * This is the model class for table "{{%sources}}".
  *
  * @property int $id
  * @property string $name Name
  * @property int $status Status
  */
-class Sourse extends \yii\db\ActiveRecord
+class Source extends \yii\db\ActiveRecord
 {
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 2;
@@ -21,7 +21,7 @@ class Sourse extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%sourses}}';
+        return '{{%sources}}';
     }
 
     /**

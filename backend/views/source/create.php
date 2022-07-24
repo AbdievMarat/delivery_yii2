@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Sourse */
+/* @var $model backend\models\Source */
 
-$this->title = Yii::t('sourse', 'Create Sourse');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('sourse', 'Sourses'), 'url' => ['index']];
+$this->title = Yii::t('source', 'Create Source');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('source', 'Sources'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="sourse-create">
+<div class="source-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -52,7 +52,8 @@ AppAsset::register($this);
         ],
         ['label' => Yii::t('header', 'Directory'),
             'items' => [
-                ['label' => Yii::t('sourse', 'Sourses'), 'url' => ['/sourse/index']],
+                ['label' => Yii::t('user', 'Users'), 'url' => ['/user/manage/index']],
+                ['label' => Yii::t('source', 'Sources'), 'url' => ['/source/index']],
                 ['label' => Yii::t('country', 'Countries'), 'url' => ['/country/index']],
                 ['label' => Yii::t('shop', 'Shops'), 'url' => ['/shop/index']],
             ],

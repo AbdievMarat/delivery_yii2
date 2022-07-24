@@ -2,16 +2,17 @@
 
 namespace backend\controllers;
 
-use backend\models\Sourse;
-use backend\models\SourseSearch;
+use backend\models\Source;
+use backend\models\SourceSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * SourseController implements the CRUD actions for Sourse model.
+ * SourceController implements the CRUD actions for Source model.
  */
-class SourseController extends Controller
+class SourceController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +33,13 @@ class SourseController extends Controller
     }
 
     /**
-     * Lists all Sourse models.
+     * Lists all Source models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new SourseSearch();
+        $searchModel = new SourceSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +49,7 @@ class SourseController extends Controller
     }
 
     /**
-     * Displays a single Sourse model.
+     * Displays a single Source model.
      * @param int $id Код
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +62,13 @@ class SourseController extends Controller
     }
 
     /**
-     * Creates a new Sourse model.
+     * Creates a new Source model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Sourse();
+        $model = new Source();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +84,7 @@ class SourseController extends Controller
     }
 
     /**
-     * Updates an existing Sourse model.
+     * Updates an existing Source model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id Код
      * @return string|\yii\web\Response
@@ -103,7 +104,7 @@ class SourseController extends Controller
     }
 
     /**
-     * Deletes an existing Sourse model.
+     * Deletes an existing Source model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id Код
      * @return \yii\web\Response
@@ -117,15 +118,15 @@ class SourseController extends Controller
     }
 
     /**
-     * Finds the Sourse model based on its primary key value.
+     * Finds the Source model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id Код
-     * @return Sourse the loaded model
+     * @return Source the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Sourse::findOne(['id' => $id])) !== null) {
+        if (($model = Source::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

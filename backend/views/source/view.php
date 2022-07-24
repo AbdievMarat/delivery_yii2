@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Sourse */
+/* @var $model backend\models\Source */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('sourse', 'Sourses'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('source', 'Sources'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="sourse-view">
+<div class="source-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\SourseSearch */
+/* @var $model backend\models\SourceSearch */
 /* @var $form yii\bootstrap5\ActiveForm */
 ?>
 
-<div class="sourse-search">
+<div class="source-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],

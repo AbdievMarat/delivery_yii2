@@ -5,21 +5,21 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use backend\models\Sourse;
+use backend\models\Source;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\SourseSearch */
+/* @var $searchModel backend\models\SourceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('sourse', 'Sourses');
+$this->title = Yii::t('source', 'Sources');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="sourse-index">
+<div class="source-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('sourse', 'Create Sourse'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('source', 'Create Source'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -43,11 +43,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Yii::t('backend', 'Undefined');
                     }
                 },
-                'filter' => \backend\models\Sourse::getStatuses(),
+                'filter' => \backend\models\Source::getStatuses(),
             ],
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Sourse $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Source $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],
