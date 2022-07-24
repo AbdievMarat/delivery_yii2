@@ -20,7 +20,7 @@ class m220722_060600_create_shops_table extends Migration
             'address' => $this->string(500)->notNull()->comment('Address'),
             'latitude' => $this->string(100)->notNull()->comment('Latitude'),
             'longitude' => $this->string(100)->notNull()->comment('Longitude'),
-            'mobile_backend_id' => $this->string(255)->comment('Mobile backend id'),
+            'mobile_backend_id' => $this->string(255)->unique()->comment('Mobile backend id'),
             'status' => $this->tinyInteger()->notNull()->defaultValue(1)->comment('Status'),
         ]);
 
