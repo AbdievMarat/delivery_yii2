@@ -18,6 +18,9 @@ return [
             'allowedIPs' => ['*', '::1'],
             'roles' => ['@'],
         ],
+        'user' => [
+            'class' => 'backend\modules\user\Module',
+        ],
     ],
     'components' => [
         'request' => [
@@ -66,6 +69,10 @@ return [
                     'enableCaching' => false,//во время разработки false, в бою true
                 ],
             ],
+        ],
+        'image' => [
+            'class' => 'yii\image\ImageDriver',
+            'driver' => 'GD', //GD or Imagick
         ],
     ],
     'params' => $params,

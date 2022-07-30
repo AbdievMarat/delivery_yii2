@@ -4,23 +4,23 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Source */
+/* @var $model common\models\User */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('source', 'Sources'), 'url' => ['index']];
+$this->title = $model->username;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('user', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="source-view">
+<div class="user-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?php if (Yii::$app->user->can('source.update')) { ?>
+        <?php if (Yii::$app->user->can('user.manage.update')) { ?>
             <?= Html::a(Yii::t('backend', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?php } ?>
 
-        <?php if (Yii::$app->user->can('source.delete')) { ?>
+        <?php if (Yii::$app->user->can('user.manage.delete')) { ?>
             <?= Html::a(Yii::t('backend', 'Delete'), ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
@@ -34,9 +34,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+            'avatarImage:image',
             'id',
-            'name',
+            'username',
+            'email:email',
             'status',
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
 

@@ -18,9 +18,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('source', 'Create Source'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?php if (Yii::$app->user->can('source.create')) { ?>
+        <p>
+            <?= Html::a(Yii::t('source', 'Create Source'), ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
+    <?php } ?>
 
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -47,9 +49,37 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Source $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                'template' => '{view} {update} {delete}',
+                'headerOptions' => ['width' => '80'],
+                'buttons' => [
+                    'view' => function ($url) {
+                        if (Yii::$app->user->can('source.view')) {
+                            return Html::a('<i class="bi bi-eye-fill"></i>', $url, ['title' => Yii::t('backend', 'View')]);
+                        } else {
+                            return '';
+                        }
+                    },
+                    'update' => function ($url) {
+                        if (Yii::$app->user->can('source.update')) {
+                            return Html::a('<i class="bi bi-pencil-fill"></i>', $url, ['title' => Yii::t('backend', 'Update')]);
+                        } else {
+                            return '';
+                        }
+                    },
+                    'delete' => function ($url) {
+                        if (Yii::$app->user->can('source.delete')) {
+                            return Html::a('<i class="bi bi-trash-fill"></i>', $url, [
+                                'title' => Yii::t('backend', 'Delete'),
+                                'data' => [
+                                    'confirm' => Yii::t('backend', 'Are you sure you want to delete this item?'),
+                                    'method' => 'post',
+                                ],
+                            ]);
+                        } else {
+                            return '';
+                        }
+                    },
+                ]
             ],
         ],
     ]); ?>

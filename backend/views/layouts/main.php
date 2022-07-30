@@ -37,8 +37,8 @@ AppAsset::register($this);
 
     $languageItem = new cetver\LanguageSelector\items\DropDownLanguageItem([
         'languages' => [
-            'en-US' => '<span class="flag-icon flag-icon-us"></span> English',
-            'ru-RU' => '<span class="flag-icon flag-icon-ru"></span> Russian',
+            'en-US' => '<i class="bi bi-globe"></i> English',
+            'ru-RU' => '<i class="bi bi-globe"></i> Russian',
         ],
         'options' => ['encode' => false],
     ]);
@@ -47,15 +47,15 @@ AppAsset::register($this);
         ['label' => Yii::t('header', 'Home'), 'url' => ['/site/index']],
         ['label' => Yii::t('header', 'Settings'),
             'items' => [
-                ['label' => Yii::t('header', 'Translate Manager'), 'url' => ['/translatemanager']],
+                ['label' => Yii::t('header', 'Translate Manager'), 'url' => ['/translatemanager'], 'visible' => Yii::$app->user->can('translatemanager')],
             ],
         ],
         ['label' => Yii::t('header', 'Directory'),
             'items' => [
-                ['label' => Yii::t('user', 'Users'), 'url' => ['/user/manage/index']],
-                ['label' => Yii::t('source', 'Sources'), 'url' => ['/source/index']],
-                ['label' => Yii::t('country', 'Countries'), 'url' => ['/country/index']],
-                ['label' => Yii::t('shop', 'Shops'), 'url' => ['/shop/index']],
+                ['label' => Yii::t('user', 'Users'), 'url' => ['/user/manage/index'], 'visible' => Yii::$app->user->can('user.manage.index')],
+                ['label' => Yii::t('source', 'Sources'), 'url' => ['/source/index'], 'visible' => Yii::$app->user->can('source.index')],
+                ['label' => Yii::t('country', 'Countries'), 'url' => ['/country/index'], 'visible' => Yii::$app->user->can('country.index')],
+                ['label' => Yii::t('shop', 'Shops'), 'url' => ['/shop/index'], 'visible' => Yii::$app->user->can('shop.index')],
             ],
         ],
     ];
@@ -72,7 +72,7 @@ AppAsset::register($this);
         ]);
         echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
             . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
+                '<i class="bi bi-box-arrow-in-right"></i> Logout (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout text-decoration-none']
             )
             . Html::endForm();

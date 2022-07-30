@@ -8,4 +8,5 @@ return [
         'defaultZoom' => 15,
         'lang' => 'ru_RU',
     ],
+    'bsVersion' => '5.x'
 ];

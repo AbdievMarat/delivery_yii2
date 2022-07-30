@@ -37,7 +37,22 @@ class CountryYandexTariff extends \yii\db\ActiveRecord
             [['country_id'], 'integer'],
             [['name_tariff'], 'string', 'max' => 255],
             [['country_id'], 'exist', 'skipOnError' => true, 'targetClass' => Country::className(), 'targetAttribute' => ['country_id' => 'id']],
+            /*['name_tariff', 'unique', 'targetAttribute' => ['name_tariff', 'country_id']]
+            ['name_tariff', 'unique', 'filter' => function($attribute) {
+                if(
+                    (self::find()
+                    ->where(['name_tariff' => $this->name_tariff])
+                    ->andWhere(['country_id' => $this->country_id])
+                    ->count())>1
+                ) {
+                    $this->addError('name_tariff', 'Social security number already exists in the database.');
+                }
+            }],*/
         ];
+    }
+
+    public function normalizePhone($value) {
+        return $value;
     }
 
     /**

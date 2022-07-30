@@ -1,29 +1,28 @@
 <?php
 
+use common\models\User;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
-use backend\models\Country;
+
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\CountrySearch */
+/* @var $searchModel backend\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('country', 'Countries');
+$this->title = Yii::t('user', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="country-index">
+<div class="user-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php if (Yii::$app->user->can('country.create')) { ?>
+    <?php if (Yii::$app->user->can('user.manage.create')) { ?>
         <p>
-            <?= Html::a(Yii::t('country', 'Create Country'), ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a(Yii::t('user', 'Create User'), ['create'], ['class' => 'btn btn-success']) ?>
         </p>
     <?php } ?>
 
-    <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
@@ -32,15 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+            'avatarImage:image',
             'id',
-            'name',
-            'name_currency',
-            'name_organization',
-            'contact_phone',
-            //'token_yandex',
-            //'token_mobile_backend',
-            //'latitude',
-            //'longitude',
+            'username',
+            'email:email',
             [
                 'attribute' => 'status',
                 'format' => 'html',
@@ -51,29 +45,37 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Yii::t('backend', 'Undefined');
                     }
                 },
-                'filter' => Country::getStatuses(),
+                'filter' => User::getStatuses(),
             ],
+            'created_at:datetime',
+            [
+                'attribute' => 'role',
+                'value' => function ($model) {
+                    return implode(',', $model->getRole());
+                },
+            ],
+
             [
                 'class' => ActionColumn::className(),
                 'template' => '{view} {update} {delete}',
                 'headerOptions' => ['width' => '80'],
                 'buttons' => [
                     'view' => function ($url) {
-                        if (Yii::$app->user->can('country.view')) {
+                        if (Yii::$app->user->can('user.manage.view')) {
                             return Html::a('<i class="bi bi-eye-fill"></i>', $url, ['title' => Yii::t('backend', 'View')]);
                         } else {
                             return '';
                         }
                     },
                     'update' => function ($url) {
-                        if (Yii::$app->user->can('country.update')) {
+                        if (Yii::$app->user->can('user.manage.update')) {
                             return Html::a('<i class="bi bi-pencil-fill"></i>', $url, ['title' => Yii::t('backend', 'Update')]);
                         } else {
                             return '';
                         }
                     },
                     'delete' => function ($url) {
-                        if (Yii::$app->user->can('country.delete')) {
+                        if (Yii::$app->user->can('user.manage.delete')) {
                             return Html::a('<i class="bi bi-trash-fill"></i>', $url, [
                                 'title' => Yii::t('backend', 'Delete'),
                                 'data' => [
@@ -90,6 +92,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-    <?php Pjax::end(); ?>
 
 </div>
