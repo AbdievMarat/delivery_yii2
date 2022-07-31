@@ -37,29 +37,30 @@ AppAsset::register($this);
 
     $languageItem = new cetver\LanguageSelector\items\DropDownLanguageItem([
         'languages' => [
-            'en-US' => '<i class="bi bi-globe"></i> English',
-            'ru-RU' => '<i class="bi bi-globe"></i> Russian',
+            'en-US' => '<i class="bi bi-translate"></i> English',
+            'ru-RU' => '<i class="bi bi-translate"></i> Russian',
         ],
         'options' => ['encode' => false],
     ]);
 
     $menuItems = [
-        ['label' => Yii::t('header', 'Home'), 'url' => ['/site/index']],
-        ['label' => Yii::t('header', 'Settings'),
+        ['label' => '<i class="bi bi-house-door"></i> ' . Yii::t('header', 'Home'), 'icon' => '<i class="bi bi-globe"></i>', 'url' => ['/site/index']],
+        ['label' => '<i class="bi bi-gear"></i> ' . Yii::t('header', 'Settings'),
             'items' => [
-                ['label' => Yii::t('header', 'Translate Manager'), 'url' => ['/translatemanager'], 'visible' => Yii::$app->user->can('translatemanager')],
+                ['label' => '<i class="bi bi-translate"></i> ' . Yii::t('header', 'Translate Manager'), 'url' => ['/translatemanager'], 'visible' => Yii::$app->user->can('translatemanager')],
             ],
         ],
-        ['label' => Yii::t('header', 'Directory'),
+        ['label' => '<i class="bi bi-journals"></i> ' . Yii::t('header', 'Directory'),
             'items' => [
-                ['label' => Yii::t('user', 'Users'), 'url' => ['/user/manage/index'], 'visible' => Yii::$app->user->can('user.manage.index')],
-                ['label' => Yii::t('source', 'Sources'), 'url' => ['/source/index'], 'visible' => Yii::$app->user->can('source.index')],
-                ['label' => Yii::t('country', 'Countries'), 'url' => ['/country/index'], 'visible' => Yii::$app->user->can('country.index')],
-                ['label' => Yii::t('shop', 'Shops'), 'url' => ['/shop/index'], 'visible' => Yii::$app->user->can('shop.index')],
+                ['label' => '<i class="bi bi-people"></i> ' . Yii::t('user', 'Users'), 'url' => ['/user/manage/index'], 'visible' => Yii::$app->user->can('user.manage.index')],
+                ['label' => '<i class="bi bi-file-earmark-text"></i> ' . Yii::t('source', 'Sources'), 'url' => ['/source/index'], 'visible' => Yii::$app->user->can('source.index')],
+                ['label' => '<i class="bi bi-globe"></i> ' . Yii::t('country', 'Countries'), 'url' => ['/country/index'], 'visible' => Yii::$app->user->can('country.index')],
+                ['label' => '<i class="bi bi-shop"></i> ' . Yii::t('shop', 'Shops'), 'url' => ['/shop/index'], 'visible' => Yii::$app->user->can('shop.index')],
             ],
         ],
     ];
     echo Nav::widget([
+        'encodeLabels' => false,
         'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
         'items' => $menuItems,
     ]);
