@@ -44,6 +44,7 @@ class Country extends \yii\db\ActiveRecord
             [['name', 'name_currency', 'name_organization', 'contact_phone', 'token_yandex', 'token_mobile_backend'], 'string', 'max' => 255],
             [['latitude', 'longitude'], 'string', 'max' => 100],
             [['address'], 'string', 'max' => 500],
+            ['status', 'in', 'range' => array_keys($this->getStatuses())],
         ];
     }
 

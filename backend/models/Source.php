@@ -33,6 +33,7 @@ class Source extends \yii\db\ActiveRecord
             [['name'], 'required'],
             [['status'], 'integer'],
             [['name'], 'string', 'max' => 255],
+            ['status', 'in', 'range' => array_keys($this->getStatuses())],
         ];
     }
 

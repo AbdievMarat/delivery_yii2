@@ -2,6 +2,7 @@
 
 namespace backend\models;
 
+use common\models\User;
 use Yii;
 
 /**
@@ -45,6 +46,7 @@ class Shop extends \yii\db\ActiveRecord
             [['latitude', 'longitude'], 'string', 'max' => 100],
             [['country_id'], 'exist', 'skipOnError' => true, 'targetClass' => Country::className(), 'targetAttribute' => ['country_id' => 'id']],
             [['mobile_backend_id'], 'unique', 'filter' => 'status = 1'],
+            ['status', 'in', 'range' => array_keys($this->getStatuses())],
         ];
     }
 

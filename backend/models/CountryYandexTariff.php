@@ -37,6 +37,7 @@ class CountryYandexTariff extends \yii\db\ActiveRecord
             [['country_id'], 'integer'],
             [['name_tariff'], 'string', 'max' => 255],
             [['country_id'], 'exist', 'skipOnError' => true, 'targetClass' => Country::className(), 'targetAttribute' => ['country_id' => 'id']],
+            ['name_tariff', 'in', 'range' => array_keys($this->getTariffs())],
             /*['name_tariff', 'unique', 'targetAttribute' => ['name_tariff', 'country_id']]
             ['name_tariff', 'unique', 'filter' => function($attribute) {
                 if(
