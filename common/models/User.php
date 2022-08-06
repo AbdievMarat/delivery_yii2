@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use backend\models\Country;
+use phpDocumentor\Reflection\File;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -16,17 +18,20 @@ use yii\web\UploadedFile;
  *
  * @property integer $id
  * @property string $username
+ * @property string $auth_key
  * @property string $password_hash
  * @property string $password_reset_token
- * @property string $verification_token
  * @property string $email
  * @property string $avatar
- * @property string $auth_key
+ * @property string $available_countries
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
+ * @property string $verification_token
  * @property string $password write-only password
  * @property string $role
+ * @property string $password_form
+ * @property File $file
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -77,7 +82,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-            [['role', 'password_form'], 'safe'],
+            [['role', 'password_form', 'available_countries'], 'safe'],
             [
                 'file', 'file',
                 'mimeTypes' => ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'],
@@ -108,6 +113,7 @@ class User extends ActiveRecord implements IdentityInterface
             'role' => Yii::t('user', 'Role'),
             'password_form' => Yii::t('user', 'Password form'),
             'avatarImage' => Yii::t('user', 'Avatar'),
+            'available_countries' => Yii::t('user', 'Available countries'),
         ];
     }
 
@@ -368,5 +374,14 @@ class User extends ActiveRecord implements IdentityInterface
             $path = '/images/'.$this->avatar;
 
         return $path;
+    }
+
+    /**
+     * Get country from field available_countries
+     */
+    public function getAvailableCountriesList()
+    {
+        $list = Country::find()->select('name')->where(['id' => explode(',', $this->available_countries)])->all();
+        return ArrayHelper::getColumn($list, 'name', false);
     }
 }

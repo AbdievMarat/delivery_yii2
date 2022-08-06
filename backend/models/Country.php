@@ -95,7 +95,7 @@ class Country extends \yii\db\ActiveRecord
      */
     public static function getCountriesList()
     {
-        $list = self::findAll(['status' => self::STATUS_ACTIVE]);
+        $list = Country::find()->select('id, name')->where(['status' => self::STATUS_ACTIVE])->all();
         return ArrayHelper::map($list, 'id', 'name');
     }
 }

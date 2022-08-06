@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb576a4522da78a59e2ca85c04b08fc1",
+    "content-hash": "d9cead6bb42a930c49f88ae6c42729c6",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -47,7 +47,7 @@
             "version": "3.6.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "e786e3d9707ffd9b0dd330ca135b66344dcef85a"
             },
             "dist": {
@@ -675,6 +675,71 @@
             "time": "2022-06-28T04:31:04+00:00"
         },
         {
+            "name": "kartik-v/yii2-widget-select2",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-widget-select2.git",
+                "reference": "2346248bb09377bd4f0a585d7cad10be103d72ca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/2346248bb09377bd4f0a585d7cad10be103d72ca",
+                "reference": "2346248bb09377bd4f0a585d7cad10be103d72ca",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": ">=3.0.4",
+                "select2/select2": ">=4.0"
+            },
+            "default-branch": true,
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\select2\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Enhanced Yii2 wrapper for the Select2 jQuery plugin (sub repo split from yii2-widgets).",
+            "homepage": "https://github.com/kartik-v/yii2-widget-select2",
+            "keywords": [
+                "dropdown",
+                "extension",
+                "form",
+                "jquery",
+                "plugin",
+                "select2",
+                "widget",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/kartik-v/yii2-widget-select2/issues",
+                "source": "https://github.com/kartik-v/yii2-widget-select2/tree/master"
+            },
+            "funding": [
+                {
+                    "url": "https://opencollective.com/yii2-widget-select2",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2022-03-29T13:25:36+00:00"
+        },
+        {
             "name": "lajax/yii2-translate-manager",
             "version": "1.8.1",
             "source": {
@@ -931,6 +996,59 @@
                 "source": "https://github.com/php-fig/log/tree/1.1.4"
             },
             "time": "2021-05-03T11:20:27+00:00"
+        },
+        {
+            "name": "select2/select2",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/select2/select2.git",
+                "reference": "5c38f186c98d793c7d396442986191ca05634d0a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/select2/select2/zipball/5c38f186c98d793c7d396442986191ca05634d0a",
+                "reference": "5c38f186c98d793c7d396442986191ca05634d0a",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "dist/js/select2.js"
+                    ],
+                    "styles": [
+                        "dist/css/select2.css"
+                    ],
+                    "files": [
+                        "dist/js/select2.js",
+                        "dist/js/i18n/*.js",
+                        "dist/css/select2.css"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Select2 is a jQuery based replacement for select boxes.",
+            "homepage": "https://select2.org/",
+            "support": {
+                "issues": "https://github.com/select2/select2/issues",
+                "source": "https://github.com/select2/select2/tree/develop"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kevin-brown",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/select2",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2021-11-16T12:24:32+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -1304,12 +1422,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mailer.git",
-                "reference": "9f34f71ec05cef8a0d434988476ee9fd32075a6c"
+                "reference": "076043af11e58b20a68d2fd93f59cdbc6e8fdd00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mailer/zipball/9f34f71ec05cef8a0d434988476ee9fd32075a6c",
-                "reference": "9f34f71ec05cef8a0d434988476ee9fd32075a6c",
+                "url": "https://api.github.com/repos/symfony/mailer/zipball/076043af11e58b20a68d2fd93f59cdbc6e8fdd00",
+                "reference": "076043af11e58b20a68d2fd93f59cdbc6e8fdd00",
                 "shasum": ""
             },
             "require": {
@@ -1372,7 +1490,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-07-24T16:05:20+00:00"
+            "time": "2022-08-03T05:17:26+00:00"
         },
         {
             "name": "symfony/mime",
@@ -2147,12 +2265,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "a162154436ba3557f2afc44da3c6da20a4fea8d3"
+                "reference": "50b067a9cd5ea02be4676ed89c2bfabde2c94f3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/a162154436ba3557f2afc44da3c6da20a4fea8d3",
-                "reference": "a162154436ba3557f2afc44da3c6da20a4fea8d3",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/50b067a9cd5ea02be4676ed89c2bfabde2c94f3b",
+                "reference": "50b067a9cd5ea02be4676ed89c2bfabde2c94f3b",
                 "shasum": ""
             },
             "require": {
@@ -2262,7 +2380,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-07-29T10:15:54+00:00"
+            "time": "2022-08-03T09:32:18+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -3350,12 +3468,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FakerPHP/Faker.git",
-                "reference": "2620f58e3ade09b76c126e150313f2863ea431a6"
+                "reference": "eebc34ab379e7b7cb48f6d0e0f49378b00cafeff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/2620f58e3ade09b76c126e150313f2863ea431a6",
-                "reference": "2620f58e3ade09b76c126e150313f2863ea431a6",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/eebc34ab379e7b7cb48f6d0e0f49378b00cafeff",
+                "reference": "eebc34ab379e7b7cb48f6d0e0f49378b00cafeff",
                 "shasum": ""
             },
             "require": {
@@ -3410,7 +3528,7 @@
                 "issues": "https://github.com/FakerPHP/Faker/issues",
                 "source": "https://github.com/FakerPHP/Faker/tree/main"
             },
-            "time": "2022-07-22T19:10:43+00:00"
+            "time": "2022-08-01T20:21:39+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -3418,12 +3536,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "13388f00956b1503577598873fffb5ae994b5737"
+                "reference": "8f0a09ce19adcf28f25ff9d90e7329488501b363"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/13388f00956b1503577598873fffb5ae994b5737",
-                "reference": "13388f00956b1503577598873fffb5ae994b5737",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/8f0a09ce19adcf28f25ff9d90e7329488501b363",
+                "reference": "8f0a09ce19adcf28f25ff9d90e7329488501b363",
                 "shasum": ""
             },
             "require": {
@@ -3510,7 +3628,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.4.0"
+                "source": "https://github.com/guzzle/psr7/tree/master"
             },
             "funding": [
                 {
@@ -3526,7 +3644,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-20T21:43:11+00:00"
+            "time": "2022-07-31T08:48:33+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -3880,12 +3998,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "cf71d9ba9a71d50d916d36aa0f090be9a2ebd634"
+                "reference": "b84eadb189e2b0586d50e4acd202ddbe2321c742"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/cf71d9ba9a71d50d916d36aa0f090be9a2ebd634",
-                "reference": "cf71d9ba9a71d50d916d36aa0f090be9a2ebd634",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/b84eadb189e2b0586d50e4acd202ddbe2321c742",
+                "reference": "b84eadb189e2b0586d50e4acd202ddbe2321c742",
                 "shasum": ""
             },
             "require": {
@@ -3928,7 +4046,7 @@
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
                 "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.x"
             },
-            "time": "2022-07-29T14:58:10+00:00"
+            "time": "2022-07-29T17:55:23+00:00"
         },
         {
             "name": "phpspec/php-diff",
@@ -4045,12 +4163,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "af2fba18e7cd31c11bfa30616095e08bcefa3c2b"
+                "reference": "c450db218429fa4ff4af01f034c3fb54ea5b2600"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/af2fba18e7cd31c11bfa30616095e08bcefa3c2b",
-                "reference": "af2fba18e7cd31c11bfa30616095e08bcefa3c2b",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/c450db218429fa4ff4af01f034c3fb54ea5b2600",
+                "reference": "c450db218429fa4ff4af01f034c3fb54ea5b2600",
                 "shasum": ""
             },
             "require": {
@@ -4114,7 +4232,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-29T05:35:40+00:00"
+            "time": "2022-08-03T06:19:15+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -4363,12 +4481,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "8881eb27513e7a8e127fdee48b26faa5fdfa318e"
+                "reference": "c963204f63560a8b4e5913b8c39ed1fb8f60f8d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/8881eb27513e7a8e127fdee48b26faa5fdfa318e",
-                "reference": "8881eb27513e7a8e127fdee48b26faa5fdfa318e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c963204f63560a8b4e5913b8c39ed1fb8f60f8d2",
+                "reference": "c963204f63560a8b4e5913b8c39ed1fb8f60f8d2",
                 "shasum": ""
             },
             "require": {
@@ -4457,7 +4575,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-29T09:26:43+00:00"
+            "time": "2022-08-05T06:10:58+00:00"
         },
         {
             "name": "psr/http-factory",
@@ -5352,16 +5470,16 @@
         },
         {
             "name": "sebastian/recursion-context",
-            "version": "4.0.4",
+            "version": "4.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/recursion-context.git",
-                "reference": "cd9d8cf3c5804de4341c283ed787f099f5506172"
+                "reference": "e3a614438af7f71eaa6fc8e406be8a3aa5c34595"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/cd9d8cf3c5804de4341c283ed787f099f5506172",
-                "reference": "cd9d8cf3c5804de4341c283ed787f099f5506172",
+                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/e3a614438af7f71eaa6fc8e406be8a3aa5c34595",
+                "reference": "e3a614438af7f71eaa6fc8e406be8a3aa5c34595",
                 "shasum": ""
             },
             "require": {
@@ -5400,10 +5518,10 @@
                 }
             ],
             "description": "Provides functionality to recursively process PHP variables",
-            "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
+            "homepage": "https://github.com/sebastianbergmann/recursion-context",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/recursion-context/issues",
-                "source": "https://github.com/sebastianbergmann/recursion-context/tree/4.0.4"
+                "source": "https://github.com/sebastianbergmann/recursion-context/tree/4.0"
             },
             "funding": [
                 {
@@ -5411,7 +5529,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-26T13:17:30+00:00"
+            "time": "2022-07-30T08:13:09+00:00"
         },
         {
             "name": "sebastian/resource-operations",
@@ -5643,12 +5761,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "535846c7ee6bc4dd027ca0d93220601456734b10"
+                "reference": "7490104449afe1f761da22d20435607a8ef16a09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/535846c7ee6bc4dd027ca0d93220601456734b10",
-                "reference": "535846c7ee6bc4dd027ca0d93220601456734b10",
+                "url": "https://api.github.com/repos/symfony/console/zipball/7490104449afe1f761da22d20435607a8ef16a09",
+                "reference": "7490104449afe1f761da22d20435607a8ef16a09",
                 "shasum": ""
             },
             "require": {
@@ -5734,7 +5852,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-07-22T10:42:43+00:00"
+            "time": "2022-08-02T07:38:09+00:00"
         },
         {
             "name": "symfony/finder",
@@ -5967,12 +6085,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "5eb661e49ad389e4ae2b6e4df8d783a8a6548322"
+                "reference": "ef8914f48608e44899bd5a50428371543b3479c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/5eb661e49ad389e4ae2b6e4df8d783a8a6548322",
-                "reference": "5eb661e49ad389e4ae2b6e4df8d783a8a6548322",
+                "url": "https://api.github.com/repos/symfony/string/zipball/ef8914f48608e44899bd5a50428371543b3479c1",
+                "reference": "ef8914f48608e44899bd5a50428371543b3479c1",
                 "shasum": ""
             },
             "require": {
@@ -6045,7 +6163,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-07-24T16:15:25+00:00"
+            "time": "2022-08-04T14:15:09+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -6053,12 +6171,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "05d4ea560f3402c6c116afd99fdc66e60eda227e"
+                "reference": "7a3aa21ac8ab1a96cc6de5bbcab4bc9fc943b18c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/05d4ea560f3402c6c116afd99fdc66e60eda227e",
-                "reference": "05d4ea560f3402c6c116afd99fdc66e60eda227e",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/7a3aa21ac8ab1a96cc6de5bbcab4bc9fc943b18c",
+                "reference": "7a3aa21ac8ab1a96cc6de5bbcab4bc9fc943b18c",
                 "shasum": ""
             },
             "require": {
@@ -6120,7 +6238,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-27T16:58:25+00:00"
+            "time": "2022-08-02T15:52:22+00:00"
         },
         {
             "name": "theseer/tokenizer",

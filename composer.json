@@ -23,7 +23,8 @@
         "cetver/yii2-language-selector": "^1.0",
         "wbraganca/yii2-dynamicform": "*",
         "kartik-v/yii2-widget-fileinput": "*",
-        "yurkinx/yii2-image": "^1.2"
+        "yurkinx/yii2-image": "^1.2",
+        "kartik-v/yii2-widget-select2": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

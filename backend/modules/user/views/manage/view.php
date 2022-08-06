@@ -38,7 +38,28 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'username',
             'email:email',
-            'status',
+            [
+                'attribute' => 'role',
+                'value' => function ($model) {
+                    return implode(',', $model->getRole());
+                },
+            ],
+            [
+                'attribute' => 'available_countries',
+                'value' => function ($model) {
+                    return implode(',', $model->getAvailableCountriesList());
+                },
+            ],
+            [
+                'attribute' => 'status',
+                'value' => function ($model) {
+                    if (isset($model->getStatuses()[$model->status])) {
+                        return $model->getStatuses()[$model->status];
+                    } else {
+                        return Yii::t('backend', 'Undefined');
+                    }
+                },
+            ],
             'created_at:datetime',
             'updated_at:datetime',
         ],

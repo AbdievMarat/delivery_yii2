@@ -99,6 +99,10 @@ class ManageController extends Controller
                 $model->generateAuthKey();
                 $model->generateEmailVerificationToken();
 
+                if($model->available_countries){
+                    $model->available_countries = implode(',', $model->available_countries);
+                }
+
                 if($model->save()){
                     if($role = Yii::$app->authManager->getRole($model->role)){
                         Yii::$app->authManager->assign($role, $model->getId());
@@ -130,8 +134,12 @@ class ManageController extends Controller
         }
         else{
             $model = $this->findModel($id);
+            $model->available_countries = explode(',', $model->available_countries);
 
             if ($this->request->isPost && $model->load($this->request->post())) {
+                if($model->available_countries){
+                    $model->available_countries = implode(',', $model->available_countries);
+                }
                 if ($model->password_form != '') {
                     $model->setPassword($model->password_form);
                     $model->removePasswordResetToken();
