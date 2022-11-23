@@ -73,7 +73,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'email'], 'required'],
+            [['username', 'email', 'available_countries'], 'required'],
             [['username', 'email'], 'trim'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
@@ -154,7 +154,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByUsername($username)
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['email' => $username, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
@@ -377,7 +377,8 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Get country from field available_countries
+     * list of available countries
+     * @return array
      */
     public function getAvailableCountriesList()
     {

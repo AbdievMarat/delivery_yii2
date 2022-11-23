@@ -4,12 +4,8 @@ namespace backend\controllers;
 
 use backend\models\Country;
 use backend\models\CountrySearch;
-use backend\models\CountryYandexTariff;
-use backend\models\Model;
-use Exception;
 use Yii;
 use yii\filters\AccessControl;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -84,43 +80,20 @@ class CountryController extends Controller
     /**
      * Creates a new Country model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return array
+     * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
         $model = new Country();
-        $modelsYandexTariff = [new CountryYandexTariff];
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-                $modelsYandexTariff = Model::createMultiple(CountryYandexTariff::classname());
-                Model::loadMultiple($modelsYandexTariff, Yii::$app->request->post());
 
-                // validate all models
-                $valid = $model->validate();
-                $valid = Model::validateMultiple($modelsYandexTariff) && $valid;
-
-                if ($valid) {
-                    $transaction = \Yii::$app->db->beginTransaction();
-                    try {
-                        if ($flag = $model->save(false)) {
-
-                            foreach ($modelsYandexTariff as $modelCountryYandexTariff) {
-                                $modelCountryYandexTariff->country_id = $model->id;
-                                if (! ($flag = $modelCountryYandexTariff->save(false))) {
-                                    $transaction->rollBack();
-                                    break;
-                                }
-                            }
-                        }
-                        if ($flag) {
-                            $transaction->commit();
-                            return $this->redirect(['view', 'id' => $model->id]);
-                        }
-                    } catch (Exception $e) {
-                        $transaction->rollBack();
-                    }
+                if($model->yandex_tariffs){
+                    $model->yandex_tariffs = implode(',', $model->yandex_tariffs);
                 }
+                $model->save();
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -128,7 +101,6 @@ class CountryController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'modelsYandexTariff' => (empty($modelsYandexTariff)) ? [new CountryYandexTariff] : $modelsYandexTariff
         ]);
     }
 
@@ -142,47 +114,19 @@ class CountryController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $modelsYandexTariff = $model->yandexTariffs;
+        $model->yandex_tariffs = explode(',', $model->yandex_tariffs);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            $oldIDs = ArrayHelper::map($modelsYandexTariff, 'id', 'id');
-            $modelsYandexTariff = Model::createMultiple(CountryYandexTariff::classname(), $modelsYandexTariff);
-            Model::loadMultiple($modelsYandexTariff, Yii::$app->request->post());
-            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsYandexTariff, 'id', 'id')));
-
-            // validate all models
-            $valid = $model->validate();
-            $valid = Model::validateMultiple($modelsYandexTariff) && $valid;
-
-            if ($valid) {
-                $transaction = \Yii::$app->db->beginTransaction();
-                try {
-                    if ($flag = $model->save(false)) {
-                        if (! empty($deletedIDs)) {
-                            CountryYandexTariff::deleteAll(['id' => $deletedIDs]);
-                        }
-                        foreach ($modelsYandexTariff as $modelYandexTariff) {
-                            $modelYandexTariff->country_id = $model->id;
-                            if (! ($flag = $modelYandexTariff->save(false))) {
-                                $transaction->rollBack();
-                                break;
-                            }
-                        }
-                    }
-                    if ($flag) {
-                        $transaction->commit();
-                        return $this->redirect(['view', 'id' => $model->id]);
-                    }
-                } catch (Exception $e) {
-                    $transaction->rollBack();
-                }
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            if($model->yandex_tariffs){
+                $model->yandex_tariffs = implode(',', $model->yandex_tariffs);
             }
+            $model->save();
+
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
-            'modelsYandexTariff' => (empty($modelsYandexTariff)) ? [new CountryYandexTariff] : $modelsYandexTariff
-
         ]);
     }
 

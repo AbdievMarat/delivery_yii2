@@ -28,7 +28,7 @@ AppAsset::register($this);
 <header>
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => 'Kulikov.com',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar navbar-expand-md navbar-dark fixed-top',
@@ -45,7 +45,7 @@ AppAsset::register($this);
     ]);
 
     $menuItems = [
-        ['label' => '<i class="bi bi-house-door"></i> ' . Yii::t('header', 'Home'), 'icon' => '<i class="bi bi-globe"></i>', 'url' => ['/site/index']],
+        ['label' => '<i class="bi bi-card-list"></i> ' . Yii::t('header', 'Orders'), 'icon' => '<i class="bi bi-globe"></i>', 'url' => ['/order/index']],
         ['label' => '<i class="bi bi-gear"></i> ' . Yii::t('header', 'Settings'),
             'items' => [
                 ['label' => '<i class="bi bi-translate"></i> ' . Yii::t('header', 'Translate Manager'), 'url' => ['/translatemanager'], 'visible' => Yii::$app->user->can('translatemanager')],
@@ -83,8 +83,14 @@ AppAsset::register($this);
     ?>
 </header>
 
+<?php
+    $container_class = 'container';
+    if(Yii::$app->controller->id == 'order' && (Yii::$app->controller->action->id == 'index' || Yii::$app->controller->action->id == 'create' || Yii::$app->controller->action->id == 'update'))
+        $container_class = 'container-fluid';
+?>
+
 <main role="main" class="flex-shrink-0">
-    <div class="container">
+    <div class="<?= $container_class ?>">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>

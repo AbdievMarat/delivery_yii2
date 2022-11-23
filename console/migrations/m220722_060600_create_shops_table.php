@@ -14,7 +14,7 @@ class m220722_060600_create_shops_table extends Migration
     {
         $this->createTable('{{%shops}}', [
             'id' => $this->primaryKey(),
-            'country_id' => $this->integer()->notNull()->comment('Country'),
+            'country_id' => $this->integer()->comment('Country'),
             'name' => $this->string(255)->notNull()->comment('Name'),
             'contact_phone' => $this->string(255)->comment('Contact phone'),
             'address' => $this->string(500)->notNull()->comment('Address'),
@@ -38,6 +38,7 @@ class m220722_060600_create_shops_table extends Migration
             'country_id',
             'countries',
             'id',
+            'SET NULL',
             'CASCADE'
         );
     }
@@ -47,7 +48,11 @@ class m220722_060600_create_shops_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%shops}}');
+        // drops foreign key for table `{{%countries}}`
+        $this->dropForeignKey(
+            'fk-shops-country_id',
+            'shops'
+        );
 
         // drops index for column `country_id`
         $this->dropIndex(
@@ -55,10 +60,6 @@ class m220722_060600_create_shops_table extends Migration
             'shops'
         );
 
-        // drops foreign key for table `{{%countries}}`
-        $this->dropForeignKey(
-            'fk-shops-country_id',
-            'shops'
-        );
+        $this->dropTable('{{%shops}}');
     }
 }

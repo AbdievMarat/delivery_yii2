@@ -1,7 +1,6 @@
 <?php
 
 use backend\models\Country;
-use common\models\User;
 use kartik\file\FileInput;
 use kartik\select2\Select2;
 use yii\helpers\Html;
@@ -24,9 +23,9 @@ use yii\bootstrap5\ActiveForm;
 
             <?= $form->field($model, 'password_form')->passwordInput() ?>
 
-            <?= $form->field($model, 'status')->dropDownList(User::getStatuses()) ?>
+            <?= $form->field($model, 'status')->dropDownList($model->getStatuses()) ?>
 
-            <?= $form->field($model, 'role')->dropDownList(User::getRoles()) ?>
+            <?= $form->field($model, 'role')->dropDownList($model->getRoles()) ?>
 
             <?= $form->field($model, 'available_countries')->widget(Select2::classname(), [
                 'data' => Country::getCountriesList(),

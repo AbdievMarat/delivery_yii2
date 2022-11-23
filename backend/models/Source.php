@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%sources}}".
@@ -58,5 +59,16 @@ class Source extends \yii\db\ActiveRecord
             self::STATUS_ACTIVE => Yii::t('backend', 'Active'),
             self::STATUS_INACTIVE => Yii::t('backend', 'Inactive'),
         ];
+    }
+
+    /**
+     * list of sources for filters selects
+     *
+     * @return array
+     */
+    public static function getSourcesList()
+    {
+        $list = static::find()->select('id, name')->where(['status' => self::STATUS_ACTIVE])->all();
+        return ArrayHelper::map($list, 'id', 'name');
     }
 }

@@ -206,7 +206,7 @@ class ManageController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
 
-        $post = Yii::$app->request->post();
+        $post = $this->request->post();
         $id = $post['key'];
 
         $model = $this->findModel($id);

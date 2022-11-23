@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -53,11 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status',
                 'value' => function ($model) {
-                    if (isset($model->getStatuses()[$model->status])) {
-                        return $model->getStatuses()[$model->status];
-                    } else {
-                        return Yii::t('backend', 'Undefined');
-                    }
+                    return ArrayHelper::getValue($model->getStatuses(), $model->status, Yii::t('backend', 'Undefined'));
                 },
             ],
             'created_at:datetime',

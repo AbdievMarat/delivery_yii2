@@ -11,12 +11,14 @@ use yii\helpers\ArrayHelper;
  * @property int $id
  * @property string $name Name
  * @property string|null $name_currency Name currency
+ * @property string|null $currency_iso Currency ISO
  * @property string|null $name_organization Name organization
  * @property string|null $contact_phone Contact phone
  * @property string|null $token_yandex Token yandex
  * @property string|null $token_mobile_backend Token mobile backend
  * @property string|null $latitude Latitude
  * @property string|null $longitude Longitude
+ * @property string|null $yandex_tariffs Yandex tariffs
  * @property int $status Status
  * @property string|null $address Address
  */
@@ -44,7 +46,9 @@ class Country extends \yii\db\ActiveRecord
             [['name', 'name_currency', 'name_organization', 'contact_phone', 'token_yandex', 'token_mobile_backend'], 'string', 'max' => 255],
             [['latitude', 'longitude'], 'string', 'max' => 100],
             [['address'], 'string', 'max' => 500],
+            [['currency_iso'], 'string', 'min' => 3, 'max' => 3],
             ['status', 'in', 'range' => array_keys($this->getStatuses())],
+            [['yandex_tariffs'], 'safe'],
         ];
     }
 
@@ -57,12 +61,14 @@ class Country extends \yii\db\ActiveRecord
             'id' => Yii::t('backend', 'ID'),
             'name' => Yii::t('backend', 'Name'),
             'name_currency' => Yii::t('country', 'Name Currency'),
+            'currency_iso' => Yii::t('country', 'Currency ISO'),
             'name_organization' => Yii::t('country', 'Name Organization'),
             'contact_phone' => Yii::t('country', 'Contact Phone'),
             'token_yandex' => Yii::t('country', 'Token Yandex'),
             'token_mobile_backend' => Yii::t('country', 'Token Mobile Backend'),
             'latitude' => Yii::t('country', 'Latitude'),
             'longitude' => Yii::t('country', 'Longitude'),
+            'yandex_tariffs' => Yii::t('country', 'Yandex tariffs'),
             'status' => Yii::t('backend', 'Status'),
             'address' => Yii::t('country', 'Address'),
         ];
@@ -80,13 +86,13 @@ class Country extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[CountryYandexTariff]].
+     * Gets query for [[Shop]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getYandexTariffs()
+    public function getShops()
     {
-        return $this->hasMany(CountryYandexTariff::className(), ['country_id' => 'id']);
+        return $this->hasMany(Shop::className(), ['country_id' => 'id'])->andWhere(['status' => self::STATUS_ACTIVE]);
     }
 
     /**
@@ -96,7 +102,18 @@ class Country extends \yii\db\ActiveRecord
      */
     public static function getCountriesList()
     {
-        $list = Country::find()->select('id, name')->where(['status' => self::STATUS_ACTIVE])->all();
+        $list = static::find()->select('id, name')->where(['status' => self::STATUS_ACTIVE])->all();
+        return ArrayHelper::map($list, 'id', 'name');
+    }
+
+    /**
+     *  list of available countries to the user for filters selects
+     *
+     * @return array
+     */
+    public static function getAvailableCountriesToUser()
+    {
+        $list = static::find()->select('id, name')->where(['id' => explode(',', Yii::$app->user->identity->available_countries)])->all();
         return ArrayHelper::map($list, 'id', 'name');
     }
 }

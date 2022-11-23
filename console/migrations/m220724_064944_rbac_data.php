@@ -157,7 +157,7 @@ class m220724_064944_rbac_data extends Migration
         $auth->addChild($operator, $userManageIndex);
         $auth->addChild($operator, $userManageView);
 
-        $auth->assign($admin, 1);
+        //$auth->assign($admin, 1);
     }
 
     /**

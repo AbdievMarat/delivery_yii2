@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -37,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'name_currency',
+            'currency_iso',
             'name_organization',
             'contact_phone',
             'token_yandex',
@@ -44,24 +46,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'address',
             'latitude',
             'longitude',
+            'yandex_tariffs',
             [
                 'attribute' => 'status',
                 'value' => function ($model) {
-                    if (isset($model->getStatuses()[$model->status])) {
-                        return $model->getStatuses()[$model->status];
-                    } else {
-                        return Yii::t('backend', 'Undefined');
-                    }
-                },
-            ],
-            [
-                'attribute' => 'yandexTariffs',
-                'value' => function ($model) {
-                    if ($model->getYandexTariffs() !== null) {
-                        return implode(', ', array_column($model->getYandexTariffs()->select('name_tariff')->asArray()->all(), 'name_tariff'));
-                    } else {
-                        return Yii::t('backend', 'Undefined');
-                    }
+                    return ArrayHelper::getValue($model->getStatuses(), $model->status, Yii::t('backend', 'Undefined'));
                 },
             ],
         ],

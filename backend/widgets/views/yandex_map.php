@@ -27,11 +27,11 @@
 
 <script>
     function init() {
-        var myMap = new ymaps.Map('map', {
+        let myMap = new ymaps.Map('map', {
             center: [<?= $centerLatitude ?>, <?= $centerLongitude ?>],
             zoom: <?= $zoom ?>
         });
-        var myPlacemark;
+        let myPlacemark;
 
         <?php if (!empty($placeMark['lat']) || !empty($placeMark['lon'])) { ?>
             myPlacemark = new ymaps.Placemark([<?= $placeMark['lat'] ?>, <?= $placeMark['lon'] ?>], {
@@ -91,7 +91,7 @@
                     });
 
                 $('#<?= $formIdAddress ?>').val(firstGeoObject.getAddressLine());
-                $('#<?= $formIdLatitude?>').val(coords[0]);
+                $('#<?= $formIdLatitude ?>').val(coords[0]);
                 $('#<?= $formIdLongitude ?>').val(coords[1]);
             });
         }
@@ -177,6 +177,119 @@
         function showError(message, hint) {
             $('#notice').text(message + ', ' + hint).css('display', 'block');
             $('#<?= $formIdLatitude ?>').addClass('input_error');
+        }
+
+        // если на странице редактирования заказа
+        if('<?= $formIdAddress ?>' === 'order-address') {
+            // заполняет список магазинов страны по умолчанию
+            setTimeout(function () {
+                $('#order-dynamic-form').find('#order-country_id').attr('initial_load', 'true').trigger('change');
+            }, 200);
+
+            // при смене страны
+            $('#order-dynamic-form').on('change', '#order-country_id', function () {
+                let country_id = $(this).val();
+                let initial_load = $(this).attr('initial_load');
+
+                if(initial_load === 'true'){
+                    $(this).attr('initial_load', 'false')
+                }
+                else{
+                    $('.container-items').html('');
+                }
+
+                $.ajax({
+                    type: "GET",
+                    url: "/order/get-country-shops",
+                    dataType: "json",
+                    data: {
+                        country_id: country_id
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            // изменить центр карты по координатам страны
+                            myMap.setCenter([data.country_latitude, data.country_longitude]);
+
+                            $('#order-shop_id').html('<option value="">Выберите</option>');
+                            $.each(data.shops, function (index, element) {
+                                // заполняет список магазинов у выбранной страны
+                                $('#order-shop_id').append("<option value='" + element.id + "'>" + element.name + "</option>");
+
+                                // вывод магазинов на карте по координатам
+                                let myGeoObjects;
+                                if (element.latitude !== '' && element.longitude !== '') {
+                                    myGeoObjects = new ymaps.Placemark([Number(element.latitude), Number(element.longitude)], {
+                                        iconCaption: element.name,
+                                        balloonContent: '<h6 class="small">'+element.name+'<br><abbr class="address-line full-width" title="Телефон">Телефон: </abbr><a href="tel:'+element.contact_phone+'">'+element.contact_phone+'</a></h6>',
+
+                                    }, {
+                                        preset: 'islands#violetInfoIcon',
+                                        shop_id: element.id,
+                                        shop_name: element.name,
+                                        shop_mobile_backend_id: element.mobile_backend_id
+                                    });
+
+                                    myGeoObjects.events.add('click', function(e) {
+                                        let thisPlacemark = e.get('target');
+                                        let shop_id = thisPlacemark.options._options.shop_id;
+                                        let shop_name = thisPlacemark.options._options.shop_name;
+                                        let shop_mobile_backend_id = thisPlacemark.options._options.shop_mobile_backend_id;
+
+                                        $('#order-shop_id').val(shop_id);
+
+                                        let products = [], product_code, product_name, amount;
+                                        $('.dynamic_form_wrapper .item').each(function(index){
+                                            product_code = $('#orderitem-'+index+'-product_code').val();
+                                            product_name = $('#orderitem-'+index+'-product_name').val();
+                                            amount = $('#orderitem-'+index+'-amount').val();
+
+                                            products.push({product_code:product_code, product_name:product_name, amount:amount});
+                                        });
+
+                                        $.ajax({
+                                            type: "GET",
+                                            url: "/order/get-remains-products",
+                                            dataType: "json",
+                                            data: {
+                                                country_id: $('#order-country_id').val(),
+                                                products: products,
+                                                shop_mobile_backend_id: shop_mobile_backend_id
+                                            },
+                                            success: function (data) {
+                                                if (data.success) {
+                                                    $('#remains_products').addClass('mb-3');
+                                                    $('#remains_products').html('<div style="text-align: center; font-weight: bold;" class="mb-3">Доступные товары в '+shop_name+' на '+data.date_withdrawal_remains+':</div><ol class="list-group"></ol>');
+
+                                                    let product_bg_list, product_icon, product_bg_rounded;
+                                                    $.each(data.products, function(index, product) {
+                                                        if (product.remainder > 0) {
+                                                            product_bg_list = 'list-group-item-success';
+                                                            product_icon = '<i class="bi bi-check-square"></i>';
+                                                            product_bg_rounded = 'bg-success';
+                                                        }
+                                                        else{
+                                                            product_bg_list = 'list-group-item-danger';
+                                                            product_icon = '<i class="bi bi-exclamation-square"></i>';
+                                                            product_bg_rounded = 'bg-danger';
+                                                        }
+
+                                                        $('#remains_products').find('.list-group').append('<li class="list-group-item d-flex justify-content-between align-items-start list-group-item-action '+product_bg_list+'"><div class="ms-2 me-auto">'+product_icon+' '+product.product_name+'</div><span class="badge rounded-pill '+product_bg_rounded+'">'+product.remainder+'</span></li>');
+                                                    });
+                                                }
+                                                else
+                                                    $('#remains_products').html('<div class="alert alert-danger" role="alert">Сервис по остаткам недоступен!</div>');
+                                            }
+                                        });
+                                    });
+
+                                    myMap.geoObjects.add(myGeoObjects);
+                                }
+                            });
+                            $('#order-shop_id').val($('#order-shop_id_value').val());// подставляет магазин, если он был выбран
+                        }
+                    }
+                });
+            });
         }
     }
 

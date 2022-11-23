@@ -110,7 +110,10 @@ class SiteController extends Controller
         $user->setPassword('ma123');
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
+        $user->available_countries = '1';
         $user->save();
+
+        Yii::$app->authManager->assign('admin', $user->getId());
 
         return 'ok';
     }

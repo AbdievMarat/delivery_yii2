@@ -24,7 +24,10 @@
         "wbraganca/yii2-dynamicform": "*",
         "kartik-v/yii2-widget-fileinput": "*",
         "yurkinx/yii2-image": "^1.2",
-        "kartik-v/yii2-widget-select2": "*"
+        "kartik-v/yii2-widget-select2": "*",
+        "yiisoft/yii2-httpclient": "*",
+        "ext-curl": "*",
+        "ext-soap": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

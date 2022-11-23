@@ -25,7 +25,7 @@ use yii\bootstrap5\ActiveForm;
 
             <?= $form->field($model, 'mobile_backend_id')->textInput() ?>
 
-            <?= $form->field($model, 'status')->dropDownList(\backend\models\Shop::getStatuses()) ?>
+            <?= $form->field($model, 'status')->dropDownList($model->getStatuses()) ?>
         </div>
         <div class="col-md-6">
             <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
@@ -34,10 +34,10 @@ use yii\bootstrap5\ActiveForm;
 
             <div class="row">
                 <div class="col-md-6">
-                    <?= $form->field($model, 'latitude')->textInput(['maxlength' => true,'readonly'=> true]) ?>
+                    <?= $form->field($model, 'latitude')->hiddenInput()->label(false) ?>
                 </div>
                 <div class="col-md-6">
-                    <?= $form->field($model, 'longitude')->textInput(['maxlength' => true,'readonly'=> true]) ?>
+                    <?= $form->field($model, 'longitude')->hiddenInput()->label(false) ?>
                 </div>
             </div>
 

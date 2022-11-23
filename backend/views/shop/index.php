@@ -2,6 +2,7 @@
 
 use backend\models\Country;
 use backend\models\Shop;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -54,11 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status',
                 'value' => function ($model) {
-                    if (isset($model->getStatuses()[$model->status])) {
-                        return $model->getStatuses()[$model->status];
-                    } else {
-                        return Yii::t('backend', 'Undefined');
-                    }
+                    return ArrayHelper::getValue($model->getStatuses(), $model->status, Yii::t('backend', 'Undefined'));
                 },
                 'filter' => Shop::getStatuses(),
             ],

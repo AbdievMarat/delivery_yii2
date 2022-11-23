@@ -12,6 +12,7 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'language' => 'ru-RU',
+    'timeZone' => 'Asia/Bishkek',
     'modules' => [
         'translatemanager' => [
             'class' => 'lajax\translatemanager\Module',
@@ -56,6 +57,7 @@ return [
                 'en' => 'en-US'
             ],
             'rules' => [
+                '' => 'order/index'
             ],
         ],
         'i18n' => [
